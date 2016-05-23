@@ -1,6 +1,6 @@
 '......................................................................................
-'... rsyncBackup.vbs 1.06 .................. Autor: Karsten Violka kav@ctmagazin.de ...
-'... c't 9/06 .........................................................................
+'... rsyncBackup.vbs 1.06p1.................. Autor: Karsten Violka kav@ctmagazin.de ...
+'... c't 9/06 .......................................patched by jogi@kuenstner.de..................................
 '......................................................................................
 '
 '--------------------------------------------------------------------------------------
@@ -31,6 +31,9 @@ excludeFiles = Array("Cache", "parent.lock", "Temp*")
 ' Beispiel:
 'const DESTINATION="e:\rsyncbackup"
 const DESTINATION="BITTE TRAGEN SIE HIER DEN ZIELPFAD EIN"
+
+const USB_DRIVE="X:"
+const DATA_FOR="Rsync Backup "
 
 ' Anzahl der aufbewahrten Backups:
 const STAGE0_HOURLY = 399
@@ -74,12 +77,48 @@ const STAGE3_MONTHLY_FOLDER= "\_stufe3"
 ' Konstanten für ADO
 const adVarChar = 200
 const adDate = 7
-' Feldnamen fürs RecordSet
+
+DIM ButtonCode
 Dim rsFieldNames
+Dim fso, wsh, wshEnv, WSHShell
+Dim logFile
+Dim strSourceFolder, recentBackupFolder, strDateFolder, strDestinationFolder
+Dim strCmd, cmdResult
+
+
+
+
+ButtonCode = MsgBox ("Soll Datensicherung gestartet werden ? ", vbYesNo, DATA_FOR)
+
+Select Case ButtonCode
+		case vbYes 
+			DoBackup()
+		case vbNo  
+			' MsgBox "okay, keine Datensicherung"
+			Set WSHShell = WScript.CreateObject("WScript.Shell")
+			WshShell.run ("explorer.exe" & " " & DESTINATION )
+
+
+
+End Select
+
+
+Function DoBackup ()
+	DIM ButtonYesNo
+	DIM x
+	DIM WSHShell
+
+	set x = createobject("internetexplorer.application")
+	'in code, the colon acts as a line feed
+	x.navigate2 "about:blank" : x.width = 350 : x.height = 80 : x.toolbar = false : x.menubar = false : x.statusbar = false : x.visible = True
+	x.document.write "<font color=blue>"
+	x.document.write "Achtung, Datensicherung läuft"
+ 
+
+' Feldnamen fürs RecordSet
 rsFieldNames = Array("name", "date")
 
 '---- Global verwendete Variablen
-Dim fso, wsh, wshEnv
 
 set fso = CreateObject("Scripting.FileSystemObject")
 set wsh = CreateObject("WScript.Shell")
@@ -93,12 +132,9 @@ wshEnv("CYGWIN")= "NONTSEC"
 
 '---- Die Log-Datei wird im Profilverzeichnis erstellt, etwa:
 '---- c:\Dokumente und Einstellungen\Klaus\rsyncBackup.log
-Dim logFile
 logFile = wsh.ExpandEnvironmentStrings("%userprofile%") & "\rsyncBackup.log"
 
-Dim strSourceFolder, recentBackupFolder, strDateFolder, strDestinationFolder
 Set recentBackupFolder = Nothing
-Dim strCmd, cmdResult
 
 logAppend(vbCRLf & "-------- Start: " & Now & " --------------------------------------------")
 
@@ -123,9 +159,6 @@ If sourceChanged() Then
 	logAppend("--- Errorlevel: " & cmdResult(0))
 	' Zielordner umbenennen und Tilde entfernen
 	fso.MoveFolder strDestinationFolder, DESTINATION & "\" & strDateFolder
-Else
-	logAppend("--- nichts Neues")
-End If
 
 '-- Backups rotieren und alte Backups löschen
 rotate getFolderObject(DESTINATION), _
@@ -136,6 +169,29 @@ rotate getFolderObject(DESTINATION & STAGE2_WEEKLY_FOLDER), _
 		getFolderObject(DESTINATION & STAGE3_MONTHLY_FOLDER), STAGE2_WEEKLY, "m"
 logAppend("-------- Fertig: " & Now & " --------------------------------------------")
 
+		ButtonYesNo = MsgBox ("Datensicherung fertig, soll USB-Disk gleich ausgeworfen werden ?", vbYesNo, DATA_FOR)
+
+		Select Case ButtonYesNo
+			case vbYes 
+				Set WSHShell = WScript.CreateObject("WScript.Shell")
+				WshShell.run ("removedrive.exe" & " " & USB_DRIVE )
+
+		End Select
+
+		
+		
+	Else
+        MsgBox "nichts Neues => keine Sicherung",0,DATA_FOR
+		logAppend("--- nichts Neues")
+	End If
+
+
+	'close the window
+	x.quit
+	set x = nothing
+
+	
+end Function
 '---------------------------------------------------------------------------------------
 '--- Funktionen ------------------------------------------------------------------------
 '---------------------------------------------------------------------------------------
