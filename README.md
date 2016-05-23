@@ -34,4 +34,58 @@ heise-de-Version inside "RsyncBackup"-Subfolder.
 
 As I am going to do my necessary modifications here, you can see the diff between the original Heise-Version 1.06 and my changes.
 
+## Installation
 
+Your USB-Stick/Backup-Medium should now look like:
+Drive -\
+       |  
+       |- AutoBackup
+       | 
+       |- Install - \
+                    |  
+                    | install-rsync-backup.bat
+                    | prepare_vbs_ini.bat
+                    | README.md
+                    | rsyncbackup_part1.vbs
+                    | rsyncbackup_part2.vbs
+                    | rsyncbackup_part3.vbs
+                    | rsyncbackup_target.vbs
+                    | USBDLM_part1.ini
+                    | USBDLM_part2.ini
+                    | AutorunSettings.exe
+					|
+					| - RsyncBackup - \
+					                  | all contents from USBDLM
+									  | all contents from RemoveDrive
+									  | all contents from rsyncbackup, apart the script itself
+									  
+
+Plug the USB-Stick on the Computer you want to install the Backup-Tool.
+Double-Click/Call   prepare_vbs_ini.bat
+This will detect current settings in system:
+- A free drive-letter for future use with the backup-medium, starting at Z:
+- The Serial Volume of the backup-medium
+- The Users Home-Directory
+
+With these three infromations the prepare-script will generate the 
+USBDLM.ini, for the USBDLM-Tool
+rsyncbackup.vbs, the main-script.
+
+You should review the two files as there is currently no error-handling in the two batch-scripts...
+If you are happy with its contents, you should call
+ install-rsync-backup.bat
+as Administrator, otherwise it will fail.
+This will 
+- install everything into one directory named RsysncBackup in the Program-Files directory.
+- copy the generated two config-files also into the directory
+- Register USBDLM as Service
+- Finally call AutorunSettings so that you can disable Autorun for the appropriate drive.
+
+After that, eject the backup-medium and unplug it.
+
+## Usage
+Plug in the backup-medium
+A Message-Box will ask to start
+If you confirm, your data will be backed up. 
+  At the end of the backup you will be asked if you want to autremove the disk/memory-stick
+  
