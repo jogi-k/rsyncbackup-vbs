@@ -36,28 +36,28 @@ As I am going to do my necessary modifications here, you can see the diff betwee
 
 ## Installation
 
-Your USB-Stick/Backup-Medium should now look like:
-Drive -\
-       |  
-       |- AutoBackup
-       | 
-       |- Install - \
-                    |  
-                    | install-rsync-backup.bat
-                    | prepare_vbs_ini.bat
-                    | README.md
-                    | rsyncbackup_part1.vbs
-                    | rsyncbackup_part2.vbs
-                    | rsyncbackup_part3.vbs
-                    | rsyncbackup_target.vbs
-                    | USBDLM_part1.ini
-                    | USBDLM_part2.ini
-                    | AutorunSettings.exe
-					|
-					| - RsyncBackup - \
-					                  | all contents from USBDLM
-									  | all contents from RemoveDrive
-									  | all contents from rsyncbackup, apart the script itself
+Your USB-Stick/Backup-Medium should now look like:  
+    Drive -\  
+           |   
+           |- AutoBackup  
+           |   
+           |- Install - \  
+                        |   
+                        | install-rsync-backup.bat  
+                    | prepare_vbs_ini.bat  
+                    | README.md  
+                    | rsyncbackup_part1.vbs  
+                    | rsyncbackup_part2.vbs  
+                    | rsyncbackup_part3.vbs  
+                    | rsyncbackup_target.vbs  
+                    | USBDLM_part1.ini  
+                    | USBDLM_part2.ini  
+                    | AutorunSettings.exe  
+					|  
+					| - RsyncBackup - \  
+					                  | all contents from USBDLM  
+						          | all contents from RemoveDrive  
+							  | all contents from rsyncbackup, apart the script itself  
 									  
 
 Plug the USB-Stick on the Computer you want to install the Backup-Tool.
