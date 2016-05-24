@@ -74,7 +74,7 @@ With these three informations the prepare-script will generate the
 
 You should review the two files as there is currently no error-handling in the two batch-scripts...
 If you are happy with its contents, you should call
- ```install-rsync-backup.bat```
+``` install-rsync-backup.bat ```
 as Administrator, otherwise it will fail.
 This will 
 - install everything into one directory named RsysncBackup in the Program-Files directory.
