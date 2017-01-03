@@ -1,5 +1,6 @@
 # rsyncbackup-vbs
 An improved version of the rsyncbackup.vbs from heise.de
+(https://www.heise.de/download/product/rsyncbackup.vbs-39087)
 
 The idea of this modified version is to have a USB-Drive or a USB-Stick which is the Backup-Medium.
 The backup will start automatically on plugin in of the Drive/Stick.
@@ -23,7 +24,7 @@ I will - at some later point in time - include the preconditions into the instal
 - Create a folder "RsyncBackup" as subfolder in the Install-Folder
 
 
-- Get and unzip the "rsyncBackup.vbs 1.06" from the heise.de -site into the "RsyncBackup"-Subfolder
+- Get and unzip the "rsyncBackup.vbs 1.06" from the heise.de -site : https://www.heise.de/download/product/rsyncbackup.vbs-39087/download into the "RsyncBackup"-Subfolder : 
 - Get and unzip "RemoveDrive" from Uwe Siebers Homepage : http://www.uwe-sieber.de/files/removedrive.zip into the "RsyncBackup"-Subfolder
 - Get and unzip "USBDLM" from Uwe Siebers Homepage : http://www.uwe-sieber.de/files/usbdlm.zip "RsyncBackup"-Subfolder
 - Get and unzip "AutoRun Settings" from Uwe Siebers Homepage : http://www.uwe-sieber.de/files/autorunsettings.zip into the "Install"-Folder
