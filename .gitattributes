@@ -1,3 +1,4 @@
 *.ini       eol=crlf
 *.vbs       eol=crlf
 *.bat       eol=crlf
+*.tpl       eol=crlf
