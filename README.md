@@ -35,6 +35,8 @@ heise-de-Version inside "RsyncBackup"-Subfolder.
 
 As I am going to do my necessary modifications here, you can see the diff between the original Heise-Version 1.06 and my changes.
 
+In addition a calling-directory independant version of the rsyncStart.bat - Script is provided here and will replace the Heise-Version
+
 ## Installation
 
 Your USB-Stick/Backup-Medium should now look like:
@@ -55,6 +57,7 @@ Drive -\
                     | USBDLM_part1.ini  
                     | USBDLM_part2.ini  
                     | AutorunSettings.exe  
+		    | rsyncStart.bat
                     |  
                     | - RsyncBackup - \  
                                       | all contents from USBDLM  
