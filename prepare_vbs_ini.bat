@@ -32,7 +32,7 @@ type install-rsync-backup.tpl >>  install-rsync-backup.bat
 
 
 REM Now copy my patched version of rsyncStart.bat over the Heise-Version
-copy rysncStart.bat RsyncBackup\.
+copy rsyncStart.bat RsyncBackup\.
 
 
 echo Generated three files in this folder, please review :
